@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "markdown-spider"
+version = "0.1.1"
+description = "A configurable web spider that converts online documentation into well-structured Markdown files while preserving formatting and structure"
+authors = ["Tyler House <26489166+tahouse@users.noreply.github.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/tahouse/markdown-spider"
+repository = "https://github.com/tahouse/markdown-spider"
+documentation = "https://github.com/tahouse/markdown-spider/blob/main/README.md"
+keywords = [
+    "markdown",
+    "spider",
+    "web-scraping",
+    "documentation",
+    "converter",
+    "html-to-markdown",
+    "archiving",
+    "content-extraction",
+    "web-crawler",
+    "documentation-tool",
+]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Utilities",
+]
+packages = [
+    { include = "markdown_spider" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+beautifulsoup4 = ">=4.12.0"
+click = ">=8.1.7"
+markdownify = ">=0.11.6"
+pyyaml = ">=6.0.1"
+requests = ">=2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.4.2"
+black = ">=25.1.0"
+flake8 = ">=7.1.1"
+mypy = ">=1.7.0"
+pre-commit = ">=4.1.0"
+
+[tool.poetry.scripts]
+markdown-spider = "markdown_spider.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+^/tests/
+'''
+
+[tool.isort]
+profile = "black"
+line-length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip = ["tests"]
+
+[tool.bandit]
+exclude_dirs = ["tests", "scripts"]
+skips = ["B101", "B110", "B311", "B404", "B603", "B606", "B607", "B608"]
+targets = ["markdown_spider"]
